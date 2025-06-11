@@ -1,0 +1,9 @@
+/* src/components/ui/input.css */
+.custom-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    margin: 8px 0;
+  }
+  

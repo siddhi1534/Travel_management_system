@@ -1,0 +1,200 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #eef1f5;
+}
+
+.app-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ff5722;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.tagline {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #607d8b;
+  margin-bottom: 30px;
+}
+
+h3 {
+  color: #34495e;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Slider and Quote */
+.slider-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.slider-quote {
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.next-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  background: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Buttons */
+.book-now {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 25px;
+  font-size: 1rem;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.small-button {
+  background: #607d8b;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+input, .custom-select {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.custom-select {
+  background-color: #fff;
+  appearance: none;
+}
+
+/* Featured Carousel */
+.featured-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.featured-card {
+  flex: 0 0 auto;
+  width: 160px;
+  text-align: center;
+}
+
+.featured-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.featured-card p {
+  margin-top: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Offers Banner */
+.offers-banner {
+  background-color: #ffd54f;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* Auth Switch Links */
+.switch-auth {
+  text-align: center;
+  color: #555;
+}
+
+.switch-auth span {
+  color: #ff5722;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Booking Success */
+.booking-success {
+  text-align: center;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.booking-success p {
+  margin: 5px 0;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
