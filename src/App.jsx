@@ -16,10 +16,12 @@ import logo from "./assets/logo.png";
 function App() {
   const [view, setView] = useState("landing");
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
   const [user, setUser] = useState({ name: "", email: "", password: "", age: "" });
   const [bookingDetails, setBookingDetails] = useState({});
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [price, setPrice] = useState(null);
 
   const sliderImages = [
     { img: banner, quote: "Explore the unexpected with Travel Bug" },
@@ -58,7 +60,33 @@ function App() {
   };
 
   const handleChange = (e) => {
-    setBookingDetails({ ...bookingDetails, [e.target.name]: e.target.value });
+    const updatedDetails = { ...bookingDetails, [e.target.name]: e.target.value };
+    setBookingDetails(updatedDetails);
+    estimatePrice(updatedDetails);
+  };
+
+  const estimatePrice = (details) => {
+    let basePrices = {
+      Flights: 5000,
+      Hotels: 3000,
+      "Homestays and Villas": 2500,
+      Trains: 1500,
+      Buses: 1000,
+      Cabs: 1200,
+    };
+
+    let type = details.bookingType;
+    let people = parseInt(details.people) || 0;
+    let addOns = details.addOns ? details.addOns.split(",") : [];
+
+    let base = basePrices[type] || 0;
+    let addOnCost = addOns.length * 500;
+    let total = (base + addOnCost) * people;
+
+    let discount = total * 0.2;
+    let finalPrice = total - discount;
+
+    setPrice(finalPrice);
   };
 
   const handleBooking = (e) => {
@@ -68,22 +96,21 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="header">
+      <div className="header">
         <img src={logo} alt="Travel Bug Logo" className="logo" />
         <div>
           <h1 className="title">Travel Bug</h1>
           <p className="tagline">Your Personalized Tour Guide</p>
         </div>
-        {view === "landing" && (
-          <div className="top-buttons">
-            <button className="small-button" onClick={() => { setView("signin"); }}>Sign In</button>
-            <button className="small-button" onClick={() => { setView("signup"); }}>Sign Up</button>
-          </div>
-        )}
-      </header>
+      </div>
 
       {view === "landing" && (
         <>
+          <div className="top-buttons">
+            <button className="small-button" onClick={() => { setIsNewUser(false); setView("signin"); }}>Sign In</button>
+            <button className="small-button" onClick={() => { setIsNewUser(true); setView("signup"); }}>Sign Up</button>
+          </div>
+
           <div className="slider-container">
             <img src={sliderImages[sliderIndex].img} className="slider-image" alt="travel" />
             <p className="slider-quote">“{sliderImages[sliderIndex].quote}”</p>
@@ -115,7 +142,7 @@ function App() {
             <input name="password" type="password" placeholder="Password" required onChange={handleInputChange} />
             <button className="book-now">Sign In</button>
           </form>
-          <p className="switch-auth">New to Travel Bug? <span onClick={() => setView("signup")}>Create account</span></p>
+          <p className="switch-auth">New to Travel Bug? <span onClick={() => { setIsNewUser(true); setView("signup"); }}>Create account</span></p>
         </>
       )}
 
@@ -129,7 +156,7 @@ function App() {
             <input name="password" type="password" placeholder="Password" required onChange={handleInputChange} />
             <button className="book-now">Sign Up</button>
           </form>
-          <p className="switch-auth">Already have an account? <span onClick={() => setView("signin")}>Sign In</span></p>
+          <p className="switch-auth">Already have an account? <span onClick={() => { setIsNewUser(false); setView("signin"); }}>Sign In</span></p>
         </>
       )}
 
@@ -143,7 +170,7 @@ function App() {
           {!bookingSuccess ? (
             <form onSubmit={handleBooking}>
               <input name="destination" type="text" placeholder="Enter Destination" required onChange={handleChange} />
-              <select name="bookingType" className="custom-select" onChange={handleChange} required>
+              <select name="bookingType" className="custom-select" required onChange={handleChange}>
                 <option value="">Select Booking Type</option>
                 <option value="Flights">Flights</option>
                 <option value="Hotels">Hotels</option>
@@ -154,7 +181,8 @@ function App() {
               </select>
               <input name="date" type="date" required onChange={handleChange} />
               <input name="people" type="number" placeholder="No. of People" required onChange={handleChange} />
-              <input name="addOns" type="text" placeholder="Add-ons (e.g., Meals, Guide)" onChange={handleChange} />
+              <input name="addOns" type="text" placeholder="Add-ons (comma separated)" onChange={handleChange} />
+              {price !== null && <p className="price-estimate">Estimated Price: ₹{price}</p>}
               <button type="submit" className="book-now">Confirm Booking</button>
             </form>
           ) : (
@@ -165,6 +193,7 @@ function App() {
               <p><strong>Date:</strong> {bookingDetails.date}</p>
               <p><strong>People:</strong> {bookingDetails.people}</p>
               <p><strong>Add-ons:</strong> {bookingDetails.addOns || "None"}</p>
+              <p><strong>Total Price:</strong> ₹{price}</p>
               <button className="book-now" onClick={() => setView("landing")}>Back to Home</button>
             </div>
           )}
